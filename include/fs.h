@@ -27,8 +27,21 @@
   // Returns true if the specified file path exists.
   bool f_exists(const string file_path)
   {
+    return access(file_path, F_OK) == 0;
+  }
+
+  // Returns true if the file path points to a file.
+  bool f_isfile(const string file_path)
+  {
     struct stat s;
-    return !stat(file_path, &s) ? 1 : 0;
+    return stat(file_path, &s) == 0 ? S_ISREG(s.st_mode) : false;
+  }
+
+  // Returns true if the file path points to a directory.
+  bool f_isdir(const string file_path)
+  {
+    struct stat s;
+    return stat(file_path, &s) == 0 ? S_ISDIR(s.st_mode) : false;
   }
 
   // Creates a file.
