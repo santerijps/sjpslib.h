@@ -22,6 +22,9 @@
   // An infinite loop.
   #define loop while (1)
 
+  // Loop n times.
+  #define repeat(n) for (u64 __i = 0; __i < n; __i++)
+
   // Creates a variable and increments it
   // until it reaches stop (exclusive).
   #define countup(i, start, stop) \
