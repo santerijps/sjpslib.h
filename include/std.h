@@ -15,6 +15,7 @@
   #include "fs.h"
   #include "log.h"
   #include "math.h"
+  #include "random.h"
   #include "string.h"
   #include "timestamp.h"
   #include "types.h"
