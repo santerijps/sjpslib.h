@@ -119,7 +119,7 @@
   unsigned long long rand_range(unsigned long long _min, unsigned long long _max)
   {
     unsigned long long r = rand_u64();
-    return max(_min, r % _max + 1);
+    return r % (_max + 1 - _min) + _min;
   }
 
   /* generates a random number on [0, 2^63-1]-interval */
