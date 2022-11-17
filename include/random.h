@@ -118,7 +118,8 @@
   /* Returns a random number between _min and _max, inclusive. */
   unsigned long long rand_range(unsigned long long _min, unsigned long long _max)
   {
-    return max(_min, rand_u64() % _max + 1);
+    unsigned long long r = rand_u64();
+    return max(_min, r % _max + 1);
   }
 
   /* generates a random number on [0, 2^63-1]-interval */
