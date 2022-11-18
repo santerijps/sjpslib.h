@@ -72,7 +72,7 @@
   string f_read_string(const string file_path)
   {
     u64 file_size = f_size(file_path);
-    FILE ptr file = fopen64(file_path, "rb");
+    FILE *file = fopen64(file_path, "rb");
     string result = (string) malloc(sizeof(char) * (file_size + 1));
     result[file_size] = '\0';
     if (file != nullptr)
@@ -88,7 +88,7 @@
   // String structs contain the text content (data) and size.
   String f_read_String(const string file_path)
   {
-    FILE ptr file = fopen64(file_path, "rb");
+    FILE *file = fopen64(file_path, "rb");
     String result;
     result.size = f_size(file_path);;
     result.data = (string) malloc(sizeof(char) * (result.size + 1));

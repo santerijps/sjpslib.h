@@ -13,15 +13,29 @@
   /*
   Measure the time it takes to run a block of code.
   Where:
-  - fmt is a string
-  - body is a block of code
-  The fmt argument should contain a %llu to display the elapsed seconds.
+  - var is the name
+  - format is a string to use in printing
+  The format argument should contain a %llu to display the elapsed seconds.
   */
-  #define timeit(fmt, body)           \
-    {                                 \
-      unsigned long long a = ts_now();\
-      body;                           \
-      printf(fmt, ts_now() - a);      \
+  #define timeit(var, body)           \
+    u64 var = ts_now();\
+    body;\
+    var = ts_now() - var;
+
+  /*
+  Measure the time it takes to run a block of code.
+  Where:
+  - elapsed_var is the name of the u64 variable to contain the elapsed microseconds
+  - body is a block of code
+  - format is a string to use in printing
+  */
+  #define timeitf(body, elapsed_var, format, ...)\
+    {\
+      u64 elapsed_var;\
+      unsigned long long __start = ts_now();\
+      body;\
+      elapsed_var = ts_now() - __start;\
+      printf(format, __VA_ARGS__);\
     }
 
   /*

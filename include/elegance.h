@@ -2,37 +2,79 @@
 
   #define SJPSLIB_ELEGANCE_H
 
-  #define mod %
-  #define not !
-  #define and &&
-  #define or ||
-  #define xor ^
-  #define bitand &
-  #define bitor |
-  #define equals ==
+  // Elegance can be disabled by defining this before the import of std.
+  #ifndef SJPSLIB_DISABLE_ELEGANCE
 
-  #define is =
+    #define noop ;
 
-  #define when if(
-  #define then )
-  #define done ;
-  #define begin {
-  #define end }
+    #define mod %
+    #define not !
+    #define and &&
+    #define or ||
+    #define xor ^
+    #define bitand &
+    #define bitor |
+    #define equals ==
 
-  // An infinite loop.
-  #define loop while (1)
+    #define is =
 
-  // Loop n times.
-  #define repeat(n) for (u64 __i = 0; __i < n; __i++)
+    #define when if(
+    #define then )
+    #define done ;
+    #define begin {
+    #define end }
 
-  // Creates a variable and increments it
-  // until it reaches stop (exclusive).
-  #define countup(i, start, stop) \
-    for (i64 i = start; i < stop; i++)
+    // An infinite loop.
+    #define loop while (1)
 
-  // Creates a variable and decrements it
-  // until it reaches stop (exclusive).
-  #define countdown(i, start, stop) \
-    for (i64 i = start; i > stop; i--)
+    // Loop n times.
+    #define repeat(n) for (u64 __i = 0; __i < n; __i++)
+
+    // A basic foreach.
+    #define foreach(type, item, array, size)                  \
+      type item = array[0];                                 \
+      for(u32 __i = 0; __i < size; __i++, item=array[__i])
+
+    // Creates a variable and increments it
+    // until it reaches stop (exclusive).
+    #define countup(i, start, stop) \
+      for (i64 i = start; i < stop; i++)
+
+    // Creates a variable and decrements it
+    // until it reaches stop (exclusive).
+    #define countdown(i, start, stop) \
+      for (i64 i = start; i > stop; i--)
+
+    /*
+    Define a file context manager, similar to Python's context managers.
+    This macro opens a file and closes it afterwards.
+    If the file opening succeeds, the on_success_body will be run.
+    Otherwise the on_error_body will be run.
+    */
+    #define filecontext(file_name, mode, file_var_name, on_success_body, on_error_body)\
+      {\
+        FILE ptr file_var_name = fopen64(file_name, mode);\
+        when file_var_name != nullptr\
+        then begin\
+          on_success_body;\
+          fclose(file_var_name);\
+        end\
+        else \
+          on_error_body\
+        done\
+      }
+
+    /*
+    Define an allocation context for heep allocations.
+    The allocation is free'd afterwards.
+    */
+    #define alloccontext(type, name, size, on_success_body, on_error_body)\
+    {\
+      type *name = (type*) malloc(sizeof(type) * size);\
+      if (name != NULL) { memset(name, 0, size); on_success_body; free(name); }\
+      else on_error_body;\
+    }
+
+  #endif
 
 #endif

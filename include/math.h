@@ -21,7 +21,7 @@
   // Divides x with y, mutating x and returns x modulus y.
   unsigned long long divmod(unsigned long long *x, unsigned long long y)
   {
-    unsigned long long m = (*x) mod y;
+    unsigned long long m = (*x) % y;
     *x /= y;
     return m;
   }
