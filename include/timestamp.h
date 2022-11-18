@@ -14,10 +14,10 @@
   Measure the time it takes to run a block of code.
   Where:
   - var is the name
-  - format is a string to use in printing
-  The format argument should contain a %llu to display the elapsed seconds.
+  - body is a block of code
+  The var variable will exist in the calling scope.
   */
-  #define timeit(var, body)           \
+  #define timeit(var, body)\
     u64 var = ts_now();\
     body;\
     var = ts_now() - var;
