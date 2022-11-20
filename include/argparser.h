@@ -108,7 +108,7 @@
     return c;
   }
 
-  void ap_AddSubCommand(struct Command *cmd, struct Command *sub) {
+  void ap_add_sub(struct Command *cmd, struct Command *sub) {
     assert(cmd != NULL);
     assert(sub != NULL);
 
@@ -132,7 +132,7 @@
     }
   }
 
-  void ap_AddOption(struct Command *c, enum ap_OptionType type, char *name) {
+  void ap_add_opt(struct Command *c, enum ap_OptionType type, char *name) {
     assert(c != NULL);
     assert(type >= BOOL_OPT && type <= STR_OPT);
     assert(name != NULL);
@@ -158,18 +158,18 @@
   }
 
   void ap_bool_opt(struct Command *c, char *name) {
-    ap_AddOption(c, BOOL_OPT, name);
+    ap_add_opt(c, BOOL_OPT, name);
   }
 
   void ap_int_opt(struct Command *c, char *name) {
-    ap_AddOption(c, INT_OPT, name);
+    ap_add_opt(c, INT_OPT, name);
   }
 
   void ap_string_opt(struct Command *c, char *name) {
-    ap_AddOption(c, STR_OPT, name);
+    ap_add_opt(c, STR_OPT, name);
   }
 
-  Option* ap_getopt(struct Command *c, const char *name) {
+  Option* ap_get_opt(struct Command *c, const char *name) {
     assert(c != NULL);
     assert(name != NULL);
 
@@ -182,7 +182,7 @@
     return NULL;
   }
 
-  void ap_AddArg(struct Command *c, char *arg) {
+  void ap_add_arg(struct Command *c, char *arg) {
     assert(c != NULL);
     assert(arg != NULL);
 
@@ -212,7 +212,7 @@
     assert(cmd != NULL);
 
     struct Command *tmp = cmd;
-    Option*read_option = NULL;
+    Option* read_option = NULL;
     bool check_for_command = true;
     bool read_option_value = false;
 
@@ -262,7 +262,7 @@
 
       if (!matched_command) {
         check_for_command = false;
-        ap_AddArg(tmp, arg);
+        ap_add_arg(tmp, arg);
       }
 
     }
