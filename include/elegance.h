@@ -28,22 +28,27 @@
     #define loop while (1)
 
     // Loop n times.
-    #define repeat(n) for (u64 __i = 0; __i < n; __i++)
+    #define repeat(n) for (u64 __i = 0; __i < (u64) n; __i++)
 
     // A basic foreach.
-    #define foreach(type, item, array, size)                  \
-      type item = array[0];                                 \
-      for(u32 __i = 0; __i < size; __i++, item=array[__i])
+    #define foreach(type, item, array, size, body)\
+      {\
+        type item = array[0];\
+        for(u64 __i = 0; __i < (u64) size; __i++, item=array[__i])\
+        {\
+          body;\
+        }\
+      }
 
-    // Creates a variable and increments it
-    // until it reaches stop (exclusive).
+    // Creates a variable and increments it until it reaches stop (exclusive).
+    // Similar to Python's range()
     #define countup(i, start, stop) \
-      for (i64 i = start; i < stop; i++)
+      for (i64 i = (i64) start; i < (i64) stop; i++)
 
-    // Creates a variable and decrements it
-    // until it reaches stop (exclusive).
+    // Creates a variable and decrements it until it reaches stop (exclusive).
+    // Similar to Python's range()
     #define countdown(i, start, stop) \
-      for (i64 i = start; i > stop; i--)
+      for (i64 i = (i64) start; i > (i64) stop; i--)
 
     /*
     Define a file context manager, similar to Python's context managers.
@@ -72,6 +77,15 @@
       type *name = (type*) malloc(sizeof(type) * size);\
       if (name != NULL) { memset(name, 0, size); on_success_body; free(name); }\
       else on_error_body;\
+    }
+
+    void *__try_return_value;
+  /* Call a function that returns a pointer. Run the code block in case of NULL. */
+  #define try(func_call, on_null_return_body)\
+    (__try_return_value = func_call, __try_return_value);\
+    if (__try_return_value == NULL)\
+    {\
+      on_null_return_body\
     }
 
   #endif
