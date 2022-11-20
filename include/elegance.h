@@ -53,15 +53,14 @@
     */
     #define filecontext(file_name, mode, file_var_name, on_success_body, on_error_body)\
       {\
-        FILE ptr file_var_name = fopen64(file_name, mode);\
-        when file_var_name != nullptr\
-        then begin\
+        FILE *file_var_name = fopen64(file_name, mode);\
+        if (file_var_name != NULL)\
+        {\
           on_success_body;\
           fclose(file_var_name);\
-        end\
+        }\
         else \
-          on_error_body\
-        done\
+          on_error_body;\
       }
 
     /*
