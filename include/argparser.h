@@ -108,6 +108,10 @@
     return c;
   }
 
+  struct Command *ap_base_command(void (*run)(struct Command *command, void *data)) {
+    return ap_command(NULL, run);
+  }
+
   void ap_add_sub(struct Command *cmd, struct Command *sub) {
     assert(cmd != NULL);
     assert(sub != NULL);
@@ -130,6 +134,12 @@
         exit(EXIT_FAILURE);
       }
     }
+  }
+
+  struct Command *ap_sub_command(struct Command *base, char *name, void (*run)(struct Command *command, void *data)) {
+    struct Command *c = ap_command(name, run);
+    ap_add_sub(base, c);
+    return c;
   }
 
   void ap_add_opt(struct Command *c, enum ap_OptionType type, char *name) {
