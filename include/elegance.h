@@ -72,7 +72,7 @@
     Define an allocation context for heep allocations.
     The allocation is free'd afterwards.
     */
-    #define alloccontext(type, name, size, on_success_body, on_error_body)\
+    #define malloccontext(type, name, size, on_success_body, on_error_body)\
     {\
       type *name = (type*) malloc(sizeof(type) * size);\
       if (name != NULL) { memset(name, 0, size); on_success_body; free(name); }\
