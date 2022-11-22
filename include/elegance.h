@@ -79,14 +79,17 @@
       else on_error_body;\
     }
 
-    void *__try_return_value;
-  /* Call a function that returns a pointer. Run the code block in case of NULL. */
-  #define try(func_call, on_null_return_body)\
-    (__try_return_value = func_call, __try_return_value);\
-    if (__try_return_value == NULL)\
-    {\
-      on_null_return_body\
-    }
+    void *__nullcheck_return_value;
+    /*
+    Call a function that returns a pointer. Run the code block in case of NULL.
+    NOTE! Not thread safe.
+    */
+    #define nullcheck(func_call, on_null_return_body)\
+      (__nullcheck_return_value = func_call, __nullcheck_return_value);\
+      if (__nullcheck_return_value == NULL)\
+      {\
+        on_null_return_body\
+      }
 
   #endif
 

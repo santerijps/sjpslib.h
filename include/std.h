@@ -13,6 +13,7 @@
   #include "argparser.h"
   #include "elegance.h"
   #include "fs.h"
+  #include "list.h"
   #include "log.h"
   #include "math.h"
   #include "random.h"
