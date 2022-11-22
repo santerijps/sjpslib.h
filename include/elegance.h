@@ -79,7 +79,7 @@
       else on_error_body;\
     }
 
-    void *__nullcheck_return_value;
+    static void *__nullcheck_return_value;
     /*
     Call a function that returns a pointer. Run the code block in case of NULL.
     NOTE! Not thread safe.
@@ -90,6 +90,9 @@
       {\
         on_null_return_body\
       }
+
+    /* Return from a function early. Execute body first. */
+    #define return$(body) {body;return;}
 
   #endif
 
