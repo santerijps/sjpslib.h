@@ -94,6 +94,22 @@
     /* Return from a function early. Execute body first. */
     #define return$(body) {body;return;}
 
+    /* Break if the condition is true. */
+    #define breakloop(condition) if (condition) break
+
+    /* Read a text file one buffer size at a time. */
+    #define BufferedFileReader(file_name, buf_size, buf_name, body, on_error_body)\
+    {\
+      char buf_name[buf_size + 1] = {0};\
+      FILE *_f = fopen64(file_name, "rb");\
+      if (_f == NULL) { on_error_body; }\
+      else while (fread(buf_name, sizeof(char), buf_size, _f) == buf_size)\
+      {\
+        body;\
+      }\
+      fclose(_f);\
+    }\
+
   #endif
 
 #endif
