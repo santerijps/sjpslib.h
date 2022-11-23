@@ -26,4 +26,12 @@
     return m;
   }
 
+  /* x to the power of y */
+  unsigned long long pow_u64(unsigned long long x, unsigned long long y)
+  {
+    unsigned long long result = 1;
+    while (y--) result *= x;
+    return result;
+  }
+
 #endif
