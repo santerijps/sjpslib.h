@@ -94,6 +94,9 @@
     /* Return from a function early. Execute body first. */
     #define return$(body) {body;return;}
 
+    /* Break from a loop early. Execute the body first. */
+    #define break$(body) {body; break;}
+
     /* Break if the condition is true. */
     #define breakloop(condition) if (condition) break
 
