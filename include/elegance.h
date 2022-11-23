@@ -116,6 +116,18 @@
     /* A case like macro for matching string in a matcher. */
     #define match(x) if (!strcmp(x, __s))
 
+    char __matcher_matched;
+    char *__matcher_s;
+
+    /* Experimental switch-like macro for strings. NOT THREAD SAFE. */
+    #define xmatcher(x) __matcher_s = x; __matcher_matched = 0;
+
+    /* Experimental case like macro for matching string in a matcher. */
+    #define xmatch(x) if (!__matcher_matched && !strcmp(x, __matcher_s) && (__matcher_matched = 1))
+
+    /* Experimental default like macro for matching string in a matcher. */
+    #define xnomatch if (!__matcher_matched)
+
   #endif
 
 #endif
