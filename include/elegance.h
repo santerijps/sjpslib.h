@@ -131,6 +131,14 @@
     /* Experimental default like macro for matching string in a matcher. */
     #define xnomatch if (!__matcher_matched)
 
+    /*
+    Initialize a new string variable on the stack and set some value to it.
+    The unused indeces are set to 0.
+    */
+    #define stringfmt(name, size, format, ...)\
+      char name[size] = {0};\
+      sprintf(name, format, __VA_ARGS__);\
+
   #endif
 
 #endif
