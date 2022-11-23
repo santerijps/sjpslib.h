@@ -45,13 +45,15 @@
   }
 
   // Creates a file.
-  void f_create(const string file_path)
+  bool f_create(const string file_path)
   {
-    i32 file_handle = open(file_path, O_CREAT);
-    if (file_handle)
+    FILE *f = fopen(file_path, "wb");
+    if (f != NULL)
     {
-      close(file_handle);
+      fclose(f);
+      return true;
     }
+    return false;
   }
 
   // Removes the file in the specified file path.
