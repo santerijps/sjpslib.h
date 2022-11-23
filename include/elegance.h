@@ -110,6 +110,12 @@
       fclose(_f);\
     }\
 
+    /* A switch-like macro for strings. */
+    #define matcher(x, body) do {char *__s = x; body;} while (0)
+
+    /* A case like macro for matching string in a matcher. */
+    #define match(x) if (!strcmp(x, __s))
+
   #endif
 
 #endif
