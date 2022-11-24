@@ -7,16 +7,9 @@
 
     #define noop ;
 
-    #define mod %
     #define not !
     #define and &&
     #define or ||
-    #define xor ^
-    #define bitand &
-    #define bitor |
-    #define equals ==
-
-    #define is =
 
     #define when if(
     #define then )
