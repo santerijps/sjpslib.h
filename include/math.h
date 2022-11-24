@@ -6,12 +6,6 @@
     #include <math.h>
   #endif
 
-  // Returns the smallest value between a and b.
-  #define min(a, b) ((a) < (b) ? (a) : (b))
-
-  // Returns the largest value between a and b.
-  #define max(a, b) ((a) > (b) ? (a) : (b))
-
   // Returns true if x is even.
   #define is_even(x) ((x) % 2 == 0)
 
