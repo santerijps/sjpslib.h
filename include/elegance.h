@@ -132,6 +132,9 @@
       char name[size] = {0};\
       sprintf(name, format, __VA_ARGS__);\
 
+    #define malloc$(size, type) (type*) malloc(size * sizeof(type))
+    #define calloc$(size, type) (type*) calloc(size, sizeof(type))
+
   #endif
 
 #endif
