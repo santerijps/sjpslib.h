@@ -6,6 +6,10 @@
     #include <stdio.h>
   #endif
 
+  #ifndef _INC_LOCALE
+    #include <locale.h>
+  #endif
+
   #ifndef _TIME_H_
     #include <time.h>
   #endif
@@ -17,6 +21,9 @@
   #define COLOR_ERROR "\033[31m"
 
   #define println(...) (printf(__VA_ARGS__),puts(""))
+  #define wprintln(...) (wprintf(__VA_ARGS__),puts(""))
+
+  #define use_default_locale setlocale(LC_ALL, "")
 
   #define log_debugf(...)\
     fprintf(stderr, COLOR_BOLD "[%s :: ln:%d :: %s] " COLOR_RESET, __FILE__, __LINE__, __FUNCTION__);\
