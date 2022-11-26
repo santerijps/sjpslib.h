@@ -10,6 +10,9 @@
 
     #include "types.h"
 
+    const string _PROCESS_CMD_PATH = "C:\\WINDOWS\\system32\\cmd.exe";
+    const string _PROCESS_PS_PATH = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe";
+
     struct Process {
       STARTUPINFO si;
       PROCESS_INFORMATION pi;
@@ -22,7 +25,8 @@
     Process proc_create(string command) {
       Process p;
       ZeroMemory(&p, sizeof(Process));
-      if(!CreateProcess(NULL, command, NULL, NULL, 0, CREATE_SUSPENDED, NULL, NULL, &p.si, &p.pi)) {
+      stringfmt(cmd, 1024, "%s /c %s", f_exists(_PROCESS_PS_PATH) ? _PROCESS_PS_PATH : _PROCESS_CMD_PATH, command);
+      if(!CreateProcess(NULL, cmd, NULL, NULL, 0, CREATE_SUSPENDED, NULL, NULL, &p.si, &p.pi)) {
         p.error = GetLastError();
       }
       return p;
@@ -34,7 +38,6 @@
       ResumeThread(p.pi.hThread);
       return p;
     }
-
 
     /* Start a process. */
     void proc_start(Process *p) {
