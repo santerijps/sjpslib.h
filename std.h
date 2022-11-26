@@ -23,6 +23,7 @@
   #include "include/list.h"
   #include "include/log.h"
   #include "include/math.h"
+  #include "include/process.h"
   #include "include/random.h"
   #include "include/string.h"
   #include "include/threads.h"
