@@ -26,7 +26,7 @@
   #include "include/process.h"
   #include "include/random.h"
   #include "include/string.h"
-  #include "include/threads.h"
+  #include "include/thread.h"
   #include "include/timestamp.h"
   #include "include/types.h"
   #include "include/util.h"

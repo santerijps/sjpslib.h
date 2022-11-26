@@ -1,6 +1,6 @@
-#ifndef SJPSLIB_THREADS_H
+#ifndef SJPSLIB_THREAD_H
 
-  #define SJPSLIB_THREADS_H
+  #define SJPSLIB_THREAD_H
 
   #ifdef _WIN32
 
