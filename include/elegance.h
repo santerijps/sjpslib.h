@@ -137,6 +137,9 @@
       string name = (string) calloc(size, sizeof(char));\
       sprintf(name, format, ##__VA_ARGS__);\
 
+    #define strlcut(s, x) &(s)[(x)]
+    #define strrcut(s, x) &(s)[strlen(s) - (x)]
+
     #define malloc$(size, type) (type*) malloc(size * sizeof(type))
     #define calloc$(size, type) (type*) calloc(size, sizeof(type))
 
