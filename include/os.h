@@ -101,6 +101,7 @@
     The files are added to the FileInfoList structure.
     Remember to free the FileInfoList!
 
+    TODO: Currently ignores files that start with a dot (.)
     TODO: Use wide strings instead!
     */
     bool list_files(const char *dir, FileInfoList *fil) {
