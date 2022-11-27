@@ -85,7 +85,7 @@
       }
 
     /* Return from a function early. Execute body first. */
-    #define return$(body) {body;return;}
+    #define return$(value, body) {body;return value;}
 
     /* Break from a loop early. Execute the body first. */
     #define break$(body) {body; break;}
@@ -128,9 +128,14 @@
     Initialize a new string variable on the stack and set some value to it.
     The unused indeces are set to 0.
     */
-    #define stringfmt(name, size, format, ...)\
+    #define strfmt(name, size, format, ...)\
       char name[size] = {0};\
-      sprintf(name, format, __VA_ARGS__);\
+      sprintf(name, format, ##__VA_ARGS__);\
+
+    /* Allocate space for string on the heap and set the value to something. */
+    #define stralloc(name, size, format, ...)\
+      string name = (string) calloc(size, sizeof(char));\
+      sprintf(name, format, ##__VA_ARGS__);\
 
     #define malloc$(size, type) (type*) malloc(size * sizeof(type))
     #define calloc$(size, type) (type*) calloc(size, sizeof(type))

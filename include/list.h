@@ -78,28 +78,6 @@
       l->items[index] = x;\
     }\
     \
-    bool name##_contains(name *l, type x)\
-    {\
-      for (size_t i = 0; i < l->len; i++)\
-      {\
-        if (l->items[i] == x) return true;\
-      }\
-      return false;\
-    }\
-    \
-    size_t name##_count(name *l, type x)\
-    {\
-      size_t count = 0;\
-      for (size_t i = 0; i < l->len; i++)\
-      {\
-        if (l->items[i] == x)\
-        {\
-          count += 1;\
-        }\
-      }\
-      return count;\
-    }\
-    \
     type name##_pop(name *l)\
     {\
       assert (l->len > 0);\
@@ -179,22 +157,5 @@
       return x;\
     }\
     \
-    void name##_sort(name *l)\
-    {\
-      for (size_t i = 0; i < l->len; i++)\
-      {\
-        for (size_t j = i + 1; j < l->len; j++)\
-        {\
-          if (l->items[i] > l->items[j])\
-          {\
-            type tmp = l->items[i];\
-            l->items[i] = l->items[j];\
-            l->items[j] = tmp;\
-          }\
-        }\
-      }\
-    }\
-    \
-
 
 #endif

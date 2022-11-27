@@ -24,6 +24,12 @@
 
   #include "types.h"
 
+  #ifdef _WIN32
+    #define FILE_PATH_DELIM '\\'
+  #else
+    #define FILE_PATH_DELIM '/'
+  #endif
+
   // Returns true if the specified file path exists.
   bool f_exists(const string file_path)
   {
