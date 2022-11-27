@@ -84,14 +84,23 @@
         on_null_return_body\
       }
 
-    /* Return from a function early. Execute body first. */
+    /* Return from a function early. Execute the body first. */
     #define return$(value, body) {body;return value;}
+
+    /* Return from a function. Execute the body before returning. */
+    #define returnif(condition, value, body...) {if(condition){body;return value;}}
 
     /* Break from a loop early. Execute the body first. */
     #define break$(body) {body; break;}
 
-    /* Break if the condition is true. */
-    #define breakloop(condition) if (condition) break
+    /* Break from a loop if the condition is true. Execute the body before breaking.*/
+    #define breakif(condition, body...) {if(condition){body;break;}}
+
+    /* Continue a loop. Execute the body first. */
+    #define continue$(body){body;continue;}
+
+    /* Continue a loop if the condition is true. Execute the body before continuing. */
+    #define continueif(condition, body...) {if(condition){body;continue;}}
 
     /* Read a text file one buffer size at a time. */
     #define BufferedFileReader(file_name, buf_size, buf_name, body, on_error_body)\
