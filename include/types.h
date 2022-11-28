@@ -2,6 +2,20 @@
 
   #define SJPSLIB_TYPES_H
 
+  #define bool u8
+  #define true 1
+  #define false 0
+
+  #define ptr *
+  #define ref &
+  #define deref *
+  #define any void*
+  #define nullptr NULL
+  #define string char*
+
+  // Return the size of a type in bits
+  #define bitsize(type) (sizeof(type) * 8)
+
   typedef char i8;
   typedef short i16;
   typedef int i32;
@@ -17,22 +31,8 @@
   typedef double f64;
   typedef double decimal;
 
-  typedef char* string;
   typedef struct String { u64 size; string data; } String;
 
   typedef u8 boolean;
-
-  #define bool u8
-  #define true ((u8)1)
-  #define false ((u8)0)
-
-  #define ptr *
-  #define ref &
-  #define deref *
-  #define any void*
-  #define nullptr NULL
-
-  // Return the size of a type in bits
-  #define bitsize(type) (sizeof(type) * 8)
 
 #endif
