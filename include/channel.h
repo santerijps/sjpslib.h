@@ -29,7 +29,7 @@
   }
 
   /* Push a message to the end of the list. */
-  void channel_push(Channel *ch, const string msg) {
+  void channel_push(Channel *ch, string msg) {
     assert (ch != NULL);
     ch->msgv[ch->msgc++] = msg;
     if (ch->msgc == ch->msgcap) {
