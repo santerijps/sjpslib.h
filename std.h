@@ -16,8 +16,8 @@
     #endif
   #endif
 
-  #include "include/argparser.h"
   #include "include/channel.h"
+  #include "include/command.h"
   #include "include/elegance.h"
   #include "include/fs.h"
   #include "include/list.h"
