@@ -61,9 +61,9 @@
   #define s_lhead(name, s, n)\
     char name[n + 1];\
     {\
-      for (u64 i = 0; i < n; i++)\
+      for (u64 __i = 0; __i < n; __i++)\
       {\
-        name[i] = s[i];\
+        name[__i] = s[__i];\
       }\
     }\
 
@@ -71,9 +71,9 @@
   #define s_rhead(name, s, n)\
     char name[strlen(s) - n + 1];\
     {\
-      for (u64 i = 0; i < (strlen(s) - n); i++)\
+      for (u64 __i = 0; __i < (strlen(s) - n); __i++)\
       {\
-        name[i] = s[i];\
+        name[__i] = s[__i];\
       }\
     }\
 
