@@ -88,7 +88,7 @@
     #define return$(body, value...) {body;return value;}
 
     /* Return from a function. Execute the body before returning. */
-    #define returnif(condition, value, body...) {if(condition){body;return value;}}
+    #define returnif(condition, body, value...) {if(condition){body;return value;}}
 
     /* Break from a loop early. Execute the body first. */
     #define break$(body) {body; break;}
