@@ -85,7 +85,7 @@
       }
 
     /* Return from a function early. Execute the body first. */
-    #define return$(value, body) {body;return value;}
+    #define return$(body, value...) {body;return value;}
 
     /* Return from a function. Execute the body before returning. */
     #define returnif(condition, value, body...) {if(condition){body;return value;}}
