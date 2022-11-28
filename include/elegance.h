@@ -105,7 +105,8 @@
     /* Read a text file one buffer size at a time. */
     #define BufferedFileReader(file_name, buf_size, buf_name, body, on_error_body)\
     {\
-      char buf_name[buf_size + 1] = {0};\
+      char buf_name[buf_size + 1];\
+      memset(buf_name, 0, buf_size + 1);\
       FILE *_f = fopen64(file_name, "rb");\
       if (_f == NULL) { on_error_body; }\
       else while (fread(buf_name, sizeof(char), buf_size, _f) == buf_size)\
@@ -134,12 +135,18 @@
     #define xnomatch if (!__matcher_matched)
 
     /*
-    Initialize a new string variable on the stack and set some value to it.
-    The unused indeces are set to 0.
+    Initialize a new string variable on the stack and set some value to it using sprintf.
     */
     #define strfmt(name, size, format, ...)\
-      char name[size] = {0};\
+      char name[size + 1];\
+      memset(name, 0, size + 1);\
       sprintf(name, format, ##__VA_ARGS__);\
+
+    /* Initialize a new string variable on the stack and set some value to it by indexing into the source string.*/
+    #define strfrom(name, size, s)\
+      char name[size + 1];\
+      memset(name, 0, size + 1);\
+      for (u64 __i = 0; __i < size; __i++) name[__i] = s[__i];
 
     /* Allocate space for string on the heap and set the value to something. */
     #define stralloc(name, size, format, ...)\
