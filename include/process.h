@@ -14,7 +14,7 @@
 
     #include "types.h"
 
-    void terminate_process_tree(DWORD pid) {
+    void proc_terminate_tree(DWORD pid) {
       PROCESSENTRY32 pe;
       memset(&pe, 0, sizeof(PROCESSENTRY32));
       pe.dwSize = sizeof(PROCESSENTRY32);
@@ -53,7 +53,8 @@
       ZeroMemory(&p.pi, sizeof(p.pi));
       p.si.cb = sizeof(p.si);
       const string shell = f_exists(_PROCESS_PS_PATH) ? _PROCESS_PS_PATH : _PROCESS_CMD_PATH;
-      strfmt(cmd, 1024, "%s /c %s", shell, command);
+      char cmd[1024] = {0};
+      sprintf(cmd, "%s /c %s", shell, command);
       if(!CreateProcess(shell, cmd, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS | CREATE_SUSPENDED | CREATE_UNICODE_ENVIRONMENT, NULL, NULL, &p.si, &p.pi)) {
         p.error = GetLastError();
       }
@@ -67,9 +68,19 @@
       return p;
     }
 
-    /* Start a process. */
+    /* Resumes the main thread of a process. */
     void proc_start(Process *p) {
       ResumeThread(p->pi.hThread);
+    }
+
+    /* Resumes the main thread of a process. */
+    void proc_resume(Process *p) {
+      ResumeThread(p->pi.hThread);
+    }
+
+    /* Suspends the main thread of a process. */
+    void proc_pause(Process *p) {
+      SuspendThread(p->pi.hThread);
     }
 
     /* Wait for a process to finish. */
@@ -79,7 +90,7 @@
 
     /* Kill a process. */
     void proc_kill(Process *p) {
-      terminate_process_tree(p->pi.dwProcessId);
+      proc_terminate_tree(p->pi.dwProcessId);
       TerminateThread(p->pi.hThread, CTRL_C_EVENT);
       TerminateProcess(p->pi.hProcess, CTRL_C_EVENT);
       CloseHandle(p->pi.hThread);

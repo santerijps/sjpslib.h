@@ -59,6 +59,11 @@
       WaitForSingleObject(t->handle, INFINITE);
     }
 
+    /* Suspends a thread. */
+    void thread_pause(struct Thread *t) {
+      SuspendThread(t->handle);
+    }
+
   #endif
 
 #endif
