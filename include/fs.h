@@ -110,4 +110,11 @@
     return result;
   }
 
+  /* Peek a character in a stream. */
+  i32 fpeekc(FILE *stream) {
+    i32 c = fgetc(stream);
+    ungetc(c, stream);
+    return c;
+  }
+
 #endif
