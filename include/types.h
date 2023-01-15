@@ -13,9 +13,6 @@
   #define nullptr NULL
   #define string char*
 
-  // Return the size of a type in bits
-  #define bitsize(type) (sizeof(type) * 8)
-
   typedef char i8;
   typedef short i16;
   typedef int i32;
